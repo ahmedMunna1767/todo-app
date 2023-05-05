@@ -58,7 +58,11 @@ onMounted(() => {
 
 <template>
   <section class="todo-wrapper">
-    <h1 class="todo-title">{{ today.day }}, {{ today.date }}</h1>
+    <div class="title-header">
+      <h1 class="todo-title">{{ today.day }}, {{ today.date }}</h1>
+      <a class="todo-title" href="https://github.com/ahmedMunna1767/todo-app"><img src="../assets/icons8-github.gif"
+          alt="Github" title="Go to Src"></a>
+    </div>
     <form @keydown.enter.prevent="">
       <input type="text" class="input-todo" v-bind:class="{ active: new_todo }" placeholder="Take the garbage out"
         v-model="new_todo" v-on:keyup.enter="addItem">
@@ -81,8 +85,8 @@ onMounted(() => {
     </div>
 
     <transition name="slide-fade">
-      <p class="status free" v-if="!pending.length"><img
-          src="https://nourabusoud.github.io/vue-todo-list/images/beer_celebration.svg" alt="celebration">Time to chill!
+      <p class="status free" v-if="!pending.length"><img src="../assets/beer_celebration.svg" alt="celebration">Time to
+        chill!
         You have no todos.</p>
     </transition>
 
@@ -108,6 +112,22 @@ onMounted(() => {
 </template>
 
 <style scoped>
+img:hover::after {
+  content: attr(title);
+  position: absolute;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.8;
+  z-index: 1;
+}
+
 .todo-wrapper {
   width: 400px;
   max-width: 100%;
@@ -121,6 +141,17 @@ onMounted(() => {
   background-color: #f4f7fc;
   overflow: hidden;
   position: relative;
+}
+
+
+.title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
 }
 
 .todo-title {
@@ -289,7 +320,7 @@ ul.todo-list li .delete:after {
   height: 16px;
   top: 50%;
   left: 50%;
-  background-image: url('https://nourabusoud.github.io/vue-todo-list/images/trash.svg');
+  background-image: url('../assets/trash.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
